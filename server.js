@@ -7,11 +7,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
-app.engine("handlebars", expresshbs({ defaultLayout: "main" }));
+app.engine(
+  "handlebars",
+  expresshbs({
+    defaultLayout: "main",
+    partialsDir: `${__dirname}/views/partials`
+  })
+);
 app.set("view engine", "handlebars");
 
-app.get("/registro", (req, res) => {
-  res.render("registro");
+const authController = require("./controllers/AuthController");
+
+app.get("/registro", authController.registro);
+
+app.use((req, res, next) => {
+  res.render("404");
 });
 
 app.listen(PORT, () => console.log("Server running on http://localhost:5000"));

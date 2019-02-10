@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const db = new Sequelize("blog", "root", "", {
+const db = new Sequelize("node-blog", "root", "", {
   dialect: "mysql",
   operatorsAliases: false
 });
